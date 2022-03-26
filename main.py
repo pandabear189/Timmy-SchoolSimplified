@@ -559,6 +559,25 @@ async def cm_tictactoe(interaction: discord.Interaction, member: discord.Member)
     )
 
 
+async def _on_message_(message: discord.Message):
+    if not message.guild.id == 763119924385939498:
+        return
+    if not message.author.id == 752984497259151370:
+        return
+    await message.add_reaction(discord.PartialEmoji(name="TurtleSmirk", id=957074334084644874))
+    await bot.process_commands(message)
+
+
+@bot.command()
+async def annoyrachel(ctx, tf: bool):
+    if not ctx.author.id == 747126643587416174:
+        return
+    if tf:
+        bot.add_listener(_on_message_, "on_message")
+    if tf is False:
+        bot.remove_listener(_on_message_, "on_message")
+
+
 for ext in get_extensions():
     try:
         bot.load_extension(ext)
